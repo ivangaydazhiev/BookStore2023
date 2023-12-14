@@ -1,3 +1,5 @@
+using BookStore.BL.Interfaces;
+using BookStore.BL.Services;
 using BookStore.DL.Interfaces;
 using BookStore.DL.Repositories;
 
@@ -11,7 +13,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 builder.Services.AddSingleton<IBookRepository, BookRepository>();
-
+builder.Services.AddSingleton<IBookService, BookService>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

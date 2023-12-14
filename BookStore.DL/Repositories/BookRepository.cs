@@ -22,10 +22,6 @@ namespace BookStore.DL.Repositories
             StaticData.Books.Remove(book);
         }
 
-        public void DeleteBook(Book book)
-        {
-            throw new NotImplementedException();
-        }
 
         public List<Book> GetAllBooks()
         {

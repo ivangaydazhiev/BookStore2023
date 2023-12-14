@@ -1,9 +1,10 @@
 ﻿
+
 using BookStore.Models.Models;
 
-namespace BookStore.DL.Interfaces
+namespace BookStore.BL.Interfaces
 {
-    public interface IBookRepository
+    public interface IBookService
     {
         public void AddBook(Book book);
 
@@ -14,5 +15,6 @@ namespace BookStore.DL.Interfaces
         public Book? GetBook(int id);
 
         public List<Book> GetAllBooks();
+
     }
 }
