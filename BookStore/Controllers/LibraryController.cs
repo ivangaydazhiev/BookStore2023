@@ -23,6 +23,13 @@ namespace BookStore.Controllers
         {
             return _libraryService.GetAllByAuthorAfterReleaseDate(request, afterDate);
         }
-
+        [HttpPost("GetAllBooksByAuthorRequestValidator")]
+        public string GetAllBooksByAuthorRequestValidator(GetAllBooksByAuthorRequest request)
+        {
+            return "ok";
+        }
+    
     }
-}
+
+ }
+
