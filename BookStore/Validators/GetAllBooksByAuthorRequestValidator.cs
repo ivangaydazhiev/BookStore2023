@@ -1,19 +1,15 @@
-using BookStore.Models.Models;
 using BookStore.Models.Requests;
 using FluentValidation;
-using FluentValidation.Validators;
+using System.Runtime.InteropServices;
 
-namespace BookStore.BL.Interfaces
+namespace BookStore.Validators
 {
-    public class GetAllBooksByAuthorRequestValidator: AbstractValidator<GetAllBooksByAuthorRequest>
+    public class GetAllBookByAuthorRequestValidator : AbstractValidator<GetAllBooksByAuthorRequest>
     {
-        public GetAllBooksByAuthorRequestValidator()
+        public GetAllBookByAuthorRequestValidator()
         {
-            RuleFor(x => x.AuthorId).NotEmpty()
-            .GreaterThan(0);
-            RuleFor(x => x.DateAfter).NotEmpty()
-                .NotNull();
-
+            RuleFor(x => x.AuthorId).NotEmpty().GreaterThan(0);
+            RuleFor(x => x.DateAfter).NotEmpty().GreaterThan(new DateTime(1978, 01, 01));
         }
     }
 }

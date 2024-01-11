@@ -1,57 +1,31 @@
-﻿using BookStore.DL.InMemoryDb;
-using BookStore.DL.Interfaces;
-using BookStore.Models.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BookStore.DL.Interfaces;
+using BookStore.DL.MemoryDb;
+using BookStore.Models.Models.Users;
 
 namespace BookStore.DL.Repositories
 {
     public class AuthorRepository : IAuthorRepository
     {
-        public void AddAuthor(Author author)
+        public List<Author> GetAll()
         {
-            StaticData.Authors.Add(author);
+            return InMemoryDb.AuthorsData;
         }
 
-        public void DeleteAuthor(int id)
+        public Author GetById(int id)
         {
-            var author = StaticData.Authors
-                .FirstOrDefault(b => b.Id == id);
-
-            if (author== null) return;
-
-            StaticData.Authors.Remove(author);
+            return InMemoryDb.AuthorsData
+                .First(a => a.Id == id);
         }
 
-
-        public List<Author> GetAllAuthors()
+        public void Add(Author author)
         {
-            return StaticData.Authors;
+            InMemoryDb.AuthorsData.Add(author);
         }
 
-     
-
-        public Author? GetAuthor(int id)
+        public void Remove(int id)
         {
-            return
-                StaticData.Authors
-                 .FirstOrDefault(b => b.Id == id);
-        }
-
-        public void UpdateAuthor(Author author)
-        {
-            var existingAuthor =
-                StaticData.Authors
-                .FirstOrDefault(b => b.Id == author.Id);
-
-            if (existingAuthor == null) return;
-
-            existingAuthor.Name = author.Name;
+            var author = GetById(id);
+            InMemoryDb.AuthorsData.Remove(author);
         }
     }
 }
- 
-

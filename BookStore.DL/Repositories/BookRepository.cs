@@ -1,53 +1,38 @@
-﻿
-using BookStore.DL.InMemoryDb;
-using BookStore.DL.Interfaces;
+﻿using BookStore.DL.Interfaces;
+using BookStore.DL.MemoryDb;
 using BookStore.Models.Models;
 
 namespace BookStore.DL.Repositories
 {
     public class BookRepository : IBookRepository
     {
-        public void AddBook(Book book)
+        public List<Book> GetAll()
         {
-            StaticData.Books.Add(book);
+            return InMemoryDb.BookData;
         }
 
-        public void DeleteBook(int id)
+        public Book GetById(int id)
         {
-            var book = StaticData.Books
-                .FirstOrDefault(b => b.Id == id);
-
-            if (book == null) return;
-
-            StaticData.Books.Remove(book);
+            return InMemoryDb.BookData
+                .First(a => a.Id == id);
         }
 
-
-        public List<Book> GetAllBooks()
+        public void Add(Book author)
         {
-            return StaticData.Books;
+            InMemoryDb.BookData.Add(author);
         }
 
-        public Book? GetBook(int id)
+        public void Remove(int id)
         {
-            return 
-                StaticData.Books
-                 .FirstOrDefault(b => b.Id == id);
+            var author = GetById(id);
+            InMemoryDb.BookData.Remove(author);
         }
 
-        public void UpdateBook(Book book)
+        public List<Book> GetAllByAuthor(int authorId)
         {
-            var existingBook =
-                StaticData.Books
-                .FirstOrDefault(b => b.Id == book.Id);
-
-            if (existingBook == null) return;
-
-            existingBook.Title = book.Title;   
-        }
-        public List<Book>GetAllByAuthor(int authorId)
-        {
-            return InMemoryDb.StaticData.Books.Where(b => b.AuthorId == authorId).ToList();
+            return InMemoryDb.BookData
+                .Where(b => b.AuthorId == authorId)
+                .ToList();
         }
     }
 }

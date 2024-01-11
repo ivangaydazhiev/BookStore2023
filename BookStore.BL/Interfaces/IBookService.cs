@@ -1,22 +1,20 @@
-﻿
-
-using BookStore.Models.Models;
-using System.Data;
+﻿using BookStore.Models.Models;
 
 namespace BookStore.BL.Interfaces
 {
     public interface IBookService
     {
-        public void AddBook(Book book);
+        List<Book> GetAll();
 
-        public void DeleteBook(int id);
+        Book GetById(int id);
 
-        public void UpdateBook(Book book);
+        void Add(Book book);
 
-        public Book? GetBook(int id);
+        void Remove(int id);
 
-        public List<Book> GetAllBooks();
-
-        public List<Book> GetAllByAuthorAfterReleaseDate(int authorId, DateTime afterDate);
+        public List<Book> 
+            GetAllByAuthorAfterReleaseDate(
+                int authorId,
+                DateTime afterDate);
     }
 }

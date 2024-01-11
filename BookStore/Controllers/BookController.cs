@@ -1,7 +1,6 @@
-
-using BookStore.BL.Interfaces;
-using BookStore.DL.Interfaces;
+﻿using BookStore.BL.Interfaces;
 using BookStore.Models.Models;
+using BookStore.Models.Models.Users;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
@@ -10,7 +9,6 @@ namespace BookStore.Controllers
     [Route("[controller]")]
     public class BookController : ControllerBase
     {
-
         private readonly IBookService _bookService;
 
         public BookController(IBookService bookService)
@@ -18,40 +16,28 @@ namespace BookStore.Controllers
             _bookService = bookService;
         }
 
-        [HttpGet("GetAllBooks")]
-
-        public List<Book> GetAllBooks()
+        [HttpGet("GetAll")]
+        public List<Book> GetAll()
         {
-            return _bookService.GetAllBooks();
+            return _bookService.GetAll();
         }
 
-        [HttpGet]
-        public Book? Get(int id)
+        [HttpGet("GetById")]
+        public Book GetById(int id)
         {
-            if (id < 0) return null;
-            return _bookService.GetBook(id);
+            return _bookService.GetById(id);
         }
 
         [HttpPost("Add")]
-
         public void Add([FromBody] Book book)
         {
-            _bookService.AddBook(book);
+            _bookService.Add(book);
         }
-
-        [HttpPost("Update")]
-
-        public void UpdateBook([FromBody] Book book)
-        {
-            _bookService.UpdateBook(book);
-        }
-
 
         [HttpDelete("Delete")]
-
         public void Delete(int id)
         {
-            _bookService.DeleteBook(id);
+            _bookService.Remove(id);
         }
     }
 }

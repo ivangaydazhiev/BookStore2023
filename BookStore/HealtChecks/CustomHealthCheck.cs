@@ -1,15 +1,11 @@
-using BookStore.BL.Interfaces;
-using BookStore.Models.Requests;
-using BookStore.Models.Responses;
 using Microsoft.Extensions.Diagnostics.HealthChecks;
 
-namespace BookStore.BL.Services
+namespace BookStore.Healthchecks
 {
-
     public class CustomHealthCheck : IHealthCheck
     {
         public Task<HealthCheckResult> CheckHealthAsync(
-           HealthCheckContext context, CancellationToken cancellationToken = default)
+            HealthCheckContext context, CancellationToken cancellationToken = default)
         {
             var isHealthy = true;
 
@@ -27,4 +23,3 @@ namespace BookStore.BL.Services
         }
     }
 }
-

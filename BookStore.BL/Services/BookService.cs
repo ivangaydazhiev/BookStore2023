@@ -1,55 +1,48 @@
-﻿
-
-using BookStore.BL.Interfaces;
-using BookStore.DL.InMemoryDb;
+﻿using BookStore.BL.Interfaces;
 using BookStore.DL.Interfaces;
 using BookStore.Models.Models;
-using System.Data;
 
 namespace BookStore.BL.Services
 {
     public class BookService : IBookService
     {
         private readonly IBookRepository _bookRepository;
-
+        
         public BookService(IBookRepository bookRepository)
-
         {
             _bookRepository = bookRepository;
         }
-        public void AddBook(Book book)
+        public List<Book> GetAll()
         {
-            _bookRepository.AddBook(book);
+            return _bookRepository.GetAll();
         }
 
-        public void DeleteBook(int id)
+        public Book GetById(int id)
         {
-           _bookRepository.DeleteBook(id);
+            if (id <= 0) return new Book();
+
+            return _bookRepository.GetById(id);
         }
 
-        public List<Book> GetAllBooks()
+        public void Add(Book book)
         {
-            return _bookRepository.GetAllBooks();
+            _bookRepository.Add(book);
         }
 
-        public Book? GetBook(int id)
+        public void Remove(int id)
         {
-            return _bookRepository.GetBook(id);
-        }
-        
-        public void UpdateBook(Book book)
-        {
-            _bookRepository.UpdateBook(book);
+           _bookRepository.Remove(id);
         }
 
-      
-        public List<Book> GetAllByAuthorAfterReleaseDate(int authorId, DateTime afterDate)
+        public List<Book> GetAllByAuthorAfterReleaseDate
+            (int authorId, DateTime afterDate)
         {
-            var result = _bookRepository.GetAllByAuthor(authorId);
+            var result =
+                _bookRepository.GetAllByAuthor(authorId);
+
             return result
                 .Where(b => b.ReleaseDate >= afterDate)
                 .ToList();
         }
-
     }
 }
