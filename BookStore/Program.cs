@@ -3,6 +3,7 @@ using BookStore.BL.Services;
 using BookStore.DL.Interfaces;
 using BookStore.DL.Repositories;
 
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -16,6 +17,11 @@ builder.Services.AddSingleton<IBookRepository, BookRepository>();
 builder.Services.AddSingleton<IBookService, BookService>();
 builder.Services.AddSingleton<IAuthorRepository, AuthorRepository>();
 builder.Services.AddSingleton<IAuthorService, AuthorService>();
+builder.Services.AddSingleton<IAuthorRepository, AuthorRepository>();
+builder.Services.AddSingleton<ILibraryService, LibraryService>();
+
+
+
 
 var app = builder.Build();
 

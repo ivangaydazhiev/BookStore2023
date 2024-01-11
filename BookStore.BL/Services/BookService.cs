@@ -1,8 +1,10 @@
 ﻿
 
 using BookStore.BL.Interfaces;
+using BookStore.DL.InMemoryDb;
 using BookStore.DL.Interfaces;
 using BookStore.Models.Models;
+using System.Data;
 
 namespace BookStore.BL.Services
 {
@@ -34,10 +36,20 @@ namespace BookStore.BL.Services
         {
             return _bookRepository.GetBook(id);
         }
-
+        
         public void UpdateBook(Book book)
         {
             _bookRepository.UpdateBook(book);
         }
+
+      
+        public List<Book> GetAllByAuthorAfterReleaseDate(int authorId, DateTime afterDate)
+        {
+            var result = _bookRepository.GetAllByAuthor(authorId);
+            return result
+                .Where(b => b.ReleaseDate >= afterDate)
+                .ToList();
+        }
+
     }
 }

@@ -45,5 +45,9 @@ namespace BookStore.DL.Repositories
 
             existingBook.Title = book.Title;   
         }
+        public List<Book>GetAllByAuthor(int authorId)
+        {
+            return InMemoryDb.StaticData.Books.Where(b => b.AuthorId == authorId).ToList();
+        }
     }
 }

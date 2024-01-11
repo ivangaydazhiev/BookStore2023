@@ -1,6 +1,7 @@
 ﻿
 
 using BookStore.Models.Models;
+using System.Data;
 
 namespace BookStore.BL.Interfaces
 {
@@ -16,5 +17,6 @@ namespace BookStore.BL.Interfaces
 
         public List<Book> GetAllBooks();
 
+        public List<Book> GetAllByAuthorAfterReleaseDate(int authorId, DateTime afterDate);
     }
 }
