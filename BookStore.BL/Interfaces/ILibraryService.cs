@@ -8,5 +8,7 @@ namespace BookStore.BL.Interfaces
         GetAllBooksByAuthorResponse?
             GetAllBooksByAuthorAfterReleaseDate(
                 GetAllBooksByAuthorRequest request);
+
+        int CheckBookCount(int input);
     }
 }
