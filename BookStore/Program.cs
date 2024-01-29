@@ -27,13 +27,13 @@ namespace BookStore
                 .AddSingleton<ILibraryService, LibraryService>();
             builder.Services.AddFluentValidationAutoValidation();
             builder.Services.AddValidatorsFromAssemblyContaining(typeof(Program));
-            builder.Services.AddHealthChecks();
+
             builder.Services.AddHealthChecks().AddCheck<CustomHealthCheck>(nameof(CustomHealthCheck));
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
-
+            builder.Services.AddControllers();
 
 
             var app = builder.Build();

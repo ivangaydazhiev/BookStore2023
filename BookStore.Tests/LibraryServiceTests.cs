@@ -4,7 +4,6 @@ using BookStore.DL.Repositories;
 using BookStore.Models.Models;
 using BookStore.Models.Models.Users;
 using BookStore.Models.Requests;
-using Microsoft.AspNetCore.Authorization;
 using Moq;
 
 namespace BookStore.Tests

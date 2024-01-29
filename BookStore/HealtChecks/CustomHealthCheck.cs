@@ -5,11 +5,10 @@ namespace BookStore.Healthchecks
     public class CustomHealthCheck : IHealthCheck
     {
         public Task<HealthCheckResult> CheckHealthAsync(
-            HealthCheckContext context, CancellationToken cancellationToken = default)
+            HealthCheckContext context, CancellationToken cancellationToken = new CancellationToken())
         {
             var isHealthy = true;
 
-            // ...
 
             if (isHealthy)
             {
