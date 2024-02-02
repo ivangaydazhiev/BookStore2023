@@ -59,6 +59,7 @@ namespace BookStore.DL.MemoryDb
                   AuthorId = 3,
                   ReleaseDate = new DateTime(2010,05,07)
                 },
+
             };
     }
 }
