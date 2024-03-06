@@ -17,30 +17,29 @@ namespace BookStore.BL.Services
             _bookService = bookService;
         }
 
-        public int CheckBookCount(int input)
-        {
-            if (input < 0) return 0;
-
-            var bookCount = _bookService.GetAll();
-
-            return bookCount.Count + input;
-        }
-
-        public GetAllBooksByAuthorResponse? 
+        public async Task <GetAllBooksByAuthorResponse>
             GetAllBooksByAuthorAfterReleaseDate(
                 GetAllBooksByAuthorRequest request)
         {
             var response = new GetAllBooksByAuthorResponse
             {
-                Author = _authorService
+                Author = await _authorService
                     .GetById(request.AuthorId),
-                Books = _bookService
+                Books = await _bookService
                     .GetAllByAuthorAfterReleaseDate(
                         request.AuthorId,
                         request.DateAfter)
             };
 
             return response;
+        }
+
+        public async Task<int> CheckBookCount(int input)
+        {
+            if (input < 1)
+                return 0;
+            var BookCount = await _bookService.GetAll();
+            return BookCount.Count() + input;
         }
     }
 }
