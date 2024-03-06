@@ -17,11 +17,16 @@ namespace BookStore.Controllers
             _libraryService = libraryService;
         }
         [HttpPost("GetAllBooksByAuthorAndDate")]
-        public GetAllBooksByAuthorResponse? 
-            GetAllBooksByAuthorAndDate([FromBody]GetAllBooksByAuthorRequest request)
+        public async Task <IActionResult> GetAllBooksByAuthor(GetAllBooksByAuthorRequest request)
         {
-            return _libraryService
-                .GetAllBooksByAuthorAfterReleaseDate(request);
+            if (request == null) return BadRequest();
+
+            var result = await _libraryService.GetAllBooksByAuthorAfterReleaseDate(request);
+
+            if (result == null) return NotFound();
+
+            return Ok(result);
+
         }
         [HttpPost("SomeEndPoint")]
         public string GetSomeData([FromBody] SomeRequest request) 

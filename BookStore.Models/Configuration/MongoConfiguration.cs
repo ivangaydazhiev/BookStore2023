@@ -1,4 +1,4 @@
-﻿namespace BookStore.DL.Configuration
+﻿namespace BookStore.Models.Configuration
 {
     public class MongoConfiguration
     {

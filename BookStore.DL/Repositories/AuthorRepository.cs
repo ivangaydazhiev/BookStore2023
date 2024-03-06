@@ -4,7 +4,7 @@ using BookStore.Models.Models.Users;
 
 namespace BookStore.DL.Repositories
 {
-    public class AuthorRepository : IAuthorRepository
+    public class AuthorRepository //: IAuthorRepository
     {
         public List<Author> GetAll()
         {
@@ -26,6 +26,8 @@ namespace BookStore.DL.Repositories
         {
             var author = GetById(id);
             InMemoryDb.AuthorsData.Remove(author);
+
         }
     }
 }
+
