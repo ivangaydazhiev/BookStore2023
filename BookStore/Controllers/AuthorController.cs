@@ -1,9 +1,11 @@
 ﻿using BookStore.BL.Interfaces;
 using BookStore.Models.Models.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BookStore.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("[controller]")]
     public class AuthorController : ControllerBase
