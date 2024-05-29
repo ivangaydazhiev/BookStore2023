@@ -1,4 +1,5 @@
 using AspNetCore.Identity.MongoDbCore.Models;
+using BookStore.BL.BackgroundJobs;
 using BookStore.BL.Interfaces;
 using BookStore.BL.Services;
 using BookStore.DL.Interfaces;
@@ -32,7 +33,7 @@ namespace BookStore
             Log.Information("Starting web application");
 
             // Add services to the container.
-
+            builder.Services.AddHostedService<MyBackgroundService>();
             var jwtSettings = new JwtSettings();
             builder.Configuration
                 .Bind(nameof(jwtSettings), jwtSettings);
@@ -57,7 +58,7 @@ namespace BookStore
                             new SymmetricSecurityKey(
                                 Encoding.ASCII.GetBytes(jwtSettings.Secret)),
                         ValidateIssuer = false,
-                        ValidAudience = null,
+                        ValidAudience = "BookStore",
                         ValidateLifetime = true
                     };
                 });
@@ -91,6 +92,12 @@ namespace BookStore
             (mongoCfg.ConnectionString, mongoCfg.DatabaseName)
             .AddSignInManager()
             .AddDefaultTokenProviders();
+
+            builder.Services.Configure<Appsettings>(
+                builder.Configuration.GetSection(nameof(Appsettings)));
+
+            builder.Services.Configure<MongoConfiguration>(
+                builder.Configuration.GetSection(nameof(MongoConfiguration)));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

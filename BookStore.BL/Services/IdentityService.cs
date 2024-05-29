@@ -119,7 +119,8 @@ namespace BookStore.BL.Services
                 ),
                 Expires = DateTime.Now.AddDays(1),
                 SigningCredentials = new SigningCredentials(
-                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
+                    new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature),
+                Audience = "BookStore"
             };
             var token = tokenHandler.CreateToken(tokenDescriptor);
 

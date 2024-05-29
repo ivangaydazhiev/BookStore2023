@@ -41,14 +41,14 @@ namespace BookStore.DL.Repositories.Mongo
            return  await _books.Find(b => b.AuthorId == authorId).ToListAsync();
         }
 
-        public  async Task<Book> GetById(int id)
+        public  async Task<Book> GetById(Guid id)
         {
             var result = await _books.FindAsync(b => b.Id == id);
 
             return result.FirstOrDefault();
         }
 
-        public async Task Remove(int id)
+        public async Task Remove(Guid id)
         {
             await _books.DeleteOneAsync(b => b.Id == id);
         }
